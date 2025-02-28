@@ -9,11 +9,14 @@ public class BuildingOptionItem : MonoBehaviour, ISwipable
 
     [SerializeField] private Image _iconImage;
 
-    private void Start()
+    public void Initialize(Sprite icon)
     {
+        SetIcon(icon);
+
+        transform.SetAsLastSibling();
     }
 
-    public void AddDragAction(IBuildingOption buildingOption)
+    public void AddDragAction(Action dragAction)
     {
         _eventTrigger.triggers.RemoveRange(0, _eventTrigger.triggers.Count);
 
@@ -21,7 +24,7 @@ public class BuildingOptionItem : MonoBehaviour, ISwipable
         entry.eventID = EventTriggerType.BeginDrag;
         entry.callback.AddListener((data) =>
         {
-            BuildingOptionsController.Instance.InitializeFollower(buildingOption);
+            dragAction?.Invoke();
         });
 
         _eventTrigger.triggers.Add(entry);
@@ -37,7 +40,7 @@ public class BuildingOptionItem : MonoBehaviour, ISwipable
 
     }
 
-    public void SetIcon(Sprite icon)
+    private void SetIcon(Sprite icon)
     {
         gameObject.SetActive(true);
         _iconImage.sprite = icon;

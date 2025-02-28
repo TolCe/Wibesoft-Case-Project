@@ -15,7 +15,9 @@ public class FarmPlot : Building, IModifiable
                 if (AttachedPlant == null)
                 {
                     AttachedPlant = PlantsPoolController.Instance.GetFromPool();
-                    AttachedPlant.Initialize(transform.position);
+                    AttachedPlant.Initialize(PlantsController.Instance.SelectedPlantData, transform.position);
+
+                    PlantsController.Instance.TakeAction();
                 }
 
                 break;
@@ -35,20 +37,7 @@ public class FarmPlot : Building, IModifiable
         {
             base.OnClicked();
 
-            BuildingOptionsScreen buildingOptionsScreen = (ScreenController.Instance.GetScreen(Enums.ScreenTypes.BuildingOptions) as BuildingOptionsScreen);
-
-            buildingOptionsScreen.ToggleScreen(true);
-            buildingOptionsScreen.ListOptions(PlantsController.Instance.Database.PlantDataList.Count);
-
-            List<BuildingOptionItem> list = new List<BuildingOptionItem>(buildingOptionsScreen.CreatedOptionList);
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i].SetIcon(PlantsController.Instance.Database.PlantDataList[i].Icon);
-
-                IBuildingOption buildingOption = AttachedPlant != null ? new OptionHarvest() : new OptionPlantSeed();
-
-                list[i].AddDragAction(buildingOption);
-            }
+            PlantsController.Instance.SetOptions(AttachedPlant != null);
         }
     }
 
@@ -57,6 +46,14 @@ public class FarmPlot : Building, IModifiable
         if (AttachedPlant == null)
         {
             return;
+        }
+
+        if (AttachedPlant.ReadyForHarvest)
+        {
+            AttachedPlant.OnHarvest();
+            AttachedPlant = null;
+
+            PlantsController.Instance.TakeAction();
         }
     }
 }

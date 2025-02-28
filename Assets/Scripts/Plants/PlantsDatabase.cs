@@ -5,4 +5,6 @@ using UnityEngine;
 public class PlantsDatabase : ScriptableObject
 {
     public List<PlantData> PlantDataList;
+
+    public Sprite HarvestIcon;
 }

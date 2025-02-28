@@ -15,3 +15,4 @@ MonoBehaviour:
   PlantDataList:
   - {fileID: 11400000, guid: ec2d08c14f8bf7a4d8ba540608442037, type: 2}
   - {fileID: 11400000, guid: 9c24a82dfa0ea2645bda8cea1aa463e7, type: 2}
+  HarvestIcon: {fileID: 21300000, guid: 70aae23bf41efff4b99790374511fe78, type: 3}
