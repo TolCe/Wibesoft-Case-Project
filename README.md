@@ -16,6 +16,4 @@ This project was made to showcase building placement and farming mechanics. The 
 <img src="https://github.com/TolCe/Wibesoft-Case-Project/blob/main/Screenshots/5.PNG" width="250" style="max-width:100%;">
 
 <img src="https://github.com/TolCe/Wibesoft-Case-Project/blob/main/Screenshots/6.PNG" width="250" style="max-width:100%;">
-
-<img src="https://github.com/TolCe/Wibesoft-Case-Project/blob/main/Screenshots/7.PNG" width="250" style="max-width:100%;">
 </p>
