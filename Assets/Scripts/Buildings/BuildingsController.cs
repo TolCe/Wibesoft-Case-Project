@@ -100,7 +100,13 @@ public class BuildingsController : Singleton<BuildingsController>
     {
         PlacedBuildingsList.Add(SelectedBuilding);
 
-        _selectedTile.AttachItem(SelectedBuilding);
+        for (int i = 0; i < (int)SelectedBuilding.Size.y; i++)
+        {
+            for (int j = 0; j < (int)SelectedBuilding.Size.x; j++)
+            {
+                GridController.Instance.Tiles[(int)(_selectedTile.Coords.y - i), (int)(_selectedTile.Coords.x + j)].AttachItem(SelectedBuilding);
+            }
+        }
 
         foreach (Building building in PlacedBuildingsList)
         {
