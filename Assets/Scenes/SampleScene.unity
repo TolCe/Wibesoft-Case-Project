@@ -509,14 +509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f15dcee2fc77f41892eacb66152f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingDatabase: {fileID: 11400000, guid: 188eec378409e4240aeb11e229c7421e, type: 2}
   _container: {fileID: 293644573}
-  _prefabDataList:
-  - BuildingType: 0
-    Prefab: {fileID: 4812059366152263134, guid: 826da743d66005f478ed806086e96c48, type: 3}
-  - BuildingType: 1
-    Prefab: {fileID: 7684932098924963381, guid: 8a9d738b58985b248b5caa181d24fcbc, type: 3}
-  - BuildingType: 2
-    Prefab: {fileID: 2756770025972796269, guid: a59c2321775cddb4a8444b8f8a6740f8, type: 3}
 --- !u!1 &301919412
 GameObject:
   m_ObjectHideFlags: 0

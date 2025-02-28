@@ -6,15 +6,15 @@ public class Plant : MonoBehaviour
 
     [SerializeField] private Renderer _rend;
 
-    public PlantData PlantData { get; private set; }
+    private PlantData _plantData;
 
-    public float HarvestTimer { get; private set; }
+    private float _harvestTimer;
 
-    public bool ReadyForHarvest { get { return HarvestTimer >= PlantData.HarvestTime; } }
+    public bool ReadyForHarvest { get { return _harvestTimer >= _plantData.HarvestTime; } }
 
     public void Initialize(PlantData data, Vector3 position)
     {
-        PlantData = data;
+        _plantData = data;
 
         gameObject.SetActive(true);
 
@@ -24,10 +24,10 @@ public class Plant : MonoBehaviour
 
     private void Update()
     {
-        if (PlantData != null)
+        if (_plantData != null)
         {
-            HarvestTimer += Time.deltaTime;
-            HarvestTimer = Mathf.Clamp(HarvestTimer, 0, PlantData.HarvestTime);
+            _harvestTimer += Time.deltaTime;
+            _harvestTimer = Mathf.Clamp(_harvestTimer, 0, _plantData.HarvestTime);
             SetPlantFilling();
         }
     }
@@ -44,13 +44,14 @@ public class Plant : MonoBehaviour
 
     public void OnHarvest()
     {
-        PlantData = null;
-        HarvestTimer = 0;
+        _plantData = null;
+        _harvestTimer = 0;
+
         PlantsPoolController.Instance.ReturnToPool(this);
     }
 
     private void SetPlantFilling()
     {
-        _scaleTransform.localScale = new Vector3(1, HarvestTimer / PlantData.HarvestTime, 1);
+        _scaleTransform.localScale = new Vector3(1, _harvestTimer / _plantData.HarvestTime, 1);
     }
 }

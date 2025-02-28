@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c823369673388e4688386c7741b1b34, type: 3}
   m_Name: BuildingDatabase
   m_EditorClassIdentifier: 
-  BuildingDataList:
+  _buildingDataList:
   - {fileID: 11400000, guid: b59914e2333065a4481ca531a34ec130, type: 2}
   - {fileID: 11400000, guid: 35f5efca246bb984cb84c3198c2b9621, type: 2}
   - {fileID: 11400000, guid: c20218c56f7aef64297c113a4594cb4c, type: 2}
+  _prefabDataList:
+  - BuildingType: 0
+    Prefab: {fileID: 4812059366152263134, guid: 826da743d66005f478ed806086e96c48, type: 3}
+  - BuildingType: 1
+    Prefab: {fileID: 7684932098924963381, guid: 8a9d738b58985b248b5caa181d24fcbc, type: 3}
+  - BuildingType: 2
+    Prefab: {fileID: 2756770025972796269, guid: a59c2321775cddb4a8444b8f8a6740f8, type: 3}

@@ -15,7 +15,7 @@ public class BuildingOptionInputFollower : MonoBehaviour
         _image.sprite = icon;
     }
 
-    public void FollowInput(Vector3 pos)
+    public void Follow(Vector3 pos)
     {
         transform.position = pos;
     }

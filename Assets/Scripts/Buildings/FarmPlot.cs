@@ -6,28 +6,21 @@ public class FarmPlot : Building, IModifiable
 {
     public Plant AttachedPlant { get; private set; }
 
-    public void Modify(Enums.BuildingOptionTypes optionType)
+    public void Modify(bool shouldPlant)
     {
-        switch (optionType)
+        if (shouldPlant)
         {
-            case Enums.BuildingOptionTypes.PlantSeed:
+            if (AttachedPlant == null)
+            {
+                AttachedPlant = PlantsPoolController.Instance.GetFromPool();
+                AttachedPlant.Initialize(PlantsController.Instance.SelectedPlantData, transform.position);
 
-                if (AttachedPlant == null)
-                {
-                    AttachedPlant = PlantsPoolController.Instance.GetFromPool();
-                    AttachedPlant.Initialize(PlantsController.Instance.SelectedPlantData, transform.position);
-
-                    PlantsController.Instance.TakeAction();
-                }
-
-                break;
-            case Enums.BuildingOptionTypes.Harvest:
-
-                TryHarvesting();
-
-                break;
-            default:
-                break;
+                PlantsController.Instance.TakeAction();
+            }
+        }
+        else
+        {
+            TryHarvesting();
         }
     }
 

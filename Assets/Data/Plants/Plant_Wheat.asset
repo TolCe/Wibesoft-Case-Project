@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044adb3c14a266c40929cc84f572cc0f, type: 3}
   m_Name: Plant_Wheat
   m_EditorClassIdentifier: 
-  PlantType: 0
-  Icon: {fileID: 21300000, guid: 72b1601e373240449b8b8f61704becf7, type: 3}
-  Color: {r: 1, g: 0.8163534, b: 0, a: 1}
-  HarvestTime: 5
+  _plantType: 0
+  _icon: {fileID: 21300000, guid: 72b1601e373240449b8b8f61704becf7, type: 3}
+  _color: {r: 1, g: 1, b: 0, a: 1}
+  _harvestTime: 6

@@ -1,4 +1,4 @@
 public interface IModifiable
 {
-    public void Modify(Enums.BuildingOptionTypes optionType);
+    public void Modify(bool shouldPlant);
 }

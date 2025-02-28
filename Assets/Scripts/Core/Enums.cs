@@ -14,12 +14,6 @@ public class Enums
         BuildingOptions,
     }
 
-    public enum BuildingOptionTypes
-    {
-        PlantSeed,
-        Harvest,
-    }
-
     public enum PlantTypes
     {
         Wheat,

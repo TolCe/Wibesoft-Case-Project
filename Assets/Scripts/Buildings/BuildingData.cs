@@ -1,11 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Building_", menuName = "Building Data")]
+[CreateAssetMenu(fileName = "Building_", menuName = "Building/Building Data")]
 public class BuildingData : ScriptableObject
 {
-    public Enums.BuildingTypes BuildingType;
+    [SerializeField] Enums.BuildingTypes _buildingType;
+    public Enums.BuildingTypes BuildingType { get { return _buildingType; } }
 
-    public Sprite Icon;
+    [SerializeField] Sprite _icon;
+    public Sprite Icon { get { return _icon; } }
 
-    public Vector2 Size = new Vector2 { x = 1, y = 1 };
+    [SerializeField] private Vector2 _size = new Vector2 { x = 1, y = 1 };
+    public Vector2 Size { get { return _size; } }
 }

@@ -47,7 +47,7 @@ public class BuildingOptionsController : Singleton<BuildingOptionsController>
 
         while (FollowingInput)
         {
-            _follower.FollowInput(InputController.Instance.GetInputPosition());
+            _follower.Follow(InputController.Instance.GetInputPosition());
 
             RaycastHit hit = InputController.Instance.CheckClickedItem();
 

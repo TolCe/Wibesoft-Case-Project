@@ -4,7 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlantDatabase", menuName = "Plant Database")]
 public class PlantsDatabase : ScriptableObject
 {
-    public List<PlantData> PlantDataList;
+    [SerializeField] private List<PlantData> _plantDataList;
+    public List<PlantData> PlantDataList { get { return _plantDataList; } }
 
-    public Sprite HarvestIcon;
+    [SerializeField] private Sprite _harvestIcon;
+    public Sprite HarvestIcon { get { return _harvestIcon; } }
 }
