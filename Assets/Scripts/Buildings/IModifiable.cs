@@ -1,4 +1,4 @@
 public interface IModifiable
 {
-    public void Modify(Enums.BuildingOptionTypes optionType, BuildingOptionData optionData);
+    public void Modify(Enums.BuildingOptionTypes optionType);
 }

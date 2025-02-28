@@ -15,12 +15,12 @@ public class Screen : MonoBehaviour
         _closeButton?.onClick.AddListener(OnCloseButtonClicked);
     }
 
-    private void OnCloseButtonClicked()
+    public virtual void OnCloseButtonClicked()
     {
         ToggleScreen(false);
     }
 
-    public void ToggleScreen(bool value)
+    public virtual void ToggleScreen(bool value)
     {
         _panelGO.SetActive(value);
     }

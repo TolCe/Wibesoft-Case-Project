@@ -1,10 +1,12 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FarmPlot : Building, IModifiable
 {
     public Plant AttachedPlant { get; private set; }
 
-    public void Modify(Enums.BuildingOptionTypes optionType, BuildingOptionData optionData)
+    public void Modify(Enums.BuildingOptionTypes optionType)
     {
         switch (optionType)
         {
@@ -13,10 +15,14 @@ public class FarmPlot : Building, IModifiable
                 if (AttachedPlant == null)
                 {
                     AttachedPlant = PlantsPoolController.Instance.GetFromPool();
+                    AttachedPlant.Initialize(transform.position);
                 }
 
                 break;
             case Enums.BuildingOptionTypes.Harvest:
+
+                TryHarvesting();
+
                 break;
             default:
                 break;
@@ -25,14 +31,32 @@ public class FarmPlot : Building, IModifiable
 
     public override void OnClicked()
     {
-        if (BuildingOptionsController.Instance.Option != null)
+        if (!BuildingOptionsController.Instance.FollowingInput)
+        {
+            base.OnClicked();
+
+            BuildingOptionsScreen buildingOptionsScreen = (ScreenController.Instance.GetScreen(Enums.ScreenTypes.BuildingOptions) as BuildingOptionsScreen);
+
+            buildingOptionsScreen.ToggleScreen(true);
+            buildingOptionsScreen.ListOptions(PlantsController.Instance.Database.PlantDataList.Count);
+
+            List<BuildingOptionItem> list = new List<BuildingOptionItem>(buildingOptionsScreen.CreatedOptionList);
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].SetIcon(PlantsController.Instance.Database.PlantDataList[i].Icon);
+
+                IBuildingOption buildingOption = AttachedPlant != null ? new OptionHarvest() : new OptionPlantSeed();
+
+                list[i].AddDragAction(buildingOption);
+            }
+        }
+    }
+
+    public void TryHarvesting()
+    {
+        if (AttachedPlant == null)
         {
             return;
         }
-
-        base.OnClicked();
-
-        ScreenController.Instance.GetScreen(Enums.ScreenTypes.BuildingOptions).ToggleScreen(true);
-        (ScreenController.Instance.GetScreen(Enums.ScreenTypes.BuildingOptions) as BuildingOptionsScreen).ListOptions(BuildingData.BuildingOptionList);
     }
 }

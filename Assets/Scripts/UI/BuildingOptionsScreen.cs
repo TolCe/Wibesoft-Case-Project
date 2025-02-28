@@ -3,17 +3,33 @@ using UnityEngine;
 
 public class BuildingOptionsScreen : Screen
 {
+    public List<BuildingOptionItem> CreatedOptionList { get; private set; }
+
     private void Start()
     {
         ToggleScreen(false);
+
+        CreatedOptionList = new List<BuildingOptionItem>();
     }
 
-    public void ListOptions(List<BuildingOptionData> optionList)
+    public override void ToggleScreen(bool value)
     {
-        foreach (BuildingOptionData option in optionList)
+        base.ToggleScreen(value);
+
+        if (!value)
+        {
+            CreatedOptionList = new List<BuildingOptionItem>();
+            BuildingOptionsPool.Instance.ReturnAllToPool();
+        }
+    }
+
+    public void ListOptions(int creationAmount)
+    {
+        for (int i = 0; i < creationAmount; i++)
         {
             BuildingOptionItem item = BuildingOptionsPool.Instance.GetFromPool();
-            item.SetData(option);
+
+            CreatedOptionList.Add(item);
         }
     }
 }

@@ -30,4 +30,9 @@ public class BuildingOptionsPool : Singleton<BuildingOptionsPool>
     {
         _pool.Return(item);
     }
+
+    public void ReturnAllToPool()
+    {
+        _pool.ReturnAll();
+    }
 }

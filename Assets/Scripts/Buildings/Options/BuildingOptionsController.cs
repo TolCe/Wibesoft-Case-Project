@@ -5,9 +5,7 @@ public class BuildingOptionsController : Singleton<BuildingOptionsController>
 {
     [SerializeField] private BuildingOptionInputFollower _follower;
 
-    private bool _followInput;
-
-    public IBuildingOption Option { get; private set; }
+    public bool FollowingInput {  get; private set; }
 
     protected override void Awake()
     {
@@ -22,35 +20,16 @@ public class BuildingOptionsController : Singleton<BuildingOptionsController>
 
     public void OnInputEnd()
     {
-        _followInput = false;
-
-        Option = null;
+        FollowingInput = false;
     }
 
-    public void InitializeFollower(BuildingOptionData data)
+    public void InitializeFollower(IBuildingOption option)
     {
         ScreenController.Instance.GetScreen(Enums.ScreenTypes.BuildingOptions).ToggleScreen(false);
 
-        _follower.SetIcon(data.Icon);
         _follower.Toggle(true);
 
-        switch (data.OptionType)
-        {
-            case Enums.BuildingOptionTypes.PlantSeed:
-
-                Option = new OptionPlantSeed();
-
-                break;
-            case Enums.BuildingOptionTypes.Harvest:
-
-                Option = new OptionHarvest();
-
-                break;
-        }
-
-        Option.SetData(data);
-
-        StartCoroutine(FollowerFollowMouse());
+        StartCoroutine(FollowerFollowMouse(option));
     }
 
     public void FollowInput()
@@ -58,11 +37,11 @@ public class BuildingOptionsController : Singleton<BuildingOptionsController>
         _follower.FollowInput(InputController.Instance.GetInputPosition());
     }
 
-    private IEnumerator FollowerFollowMouse()
+    private IEnumerator FollowerFollowMouse(IBuildingOption option)
     {
-        _followInput = true;
+        FollowingInput = true;
 
-        while (_followInput)
+        while (FollowingInput)
         {
             FollowInput();
 
@@ -71,12 +50,17 @@ public class BuildingOptionsController : Singleton<BuildingOptionsController>
             FarmPlot hitTile = hit.collider?.GetComponent<FarmPlot>();
             if (hitTile != null)
             {
-                Option.ApplyOption(hitTile);
+                option.ApplyOption(hitTile);
             }
 
             yield return new WaitForEndOfFrame();
         }
 
         _follower.Toggle(false);
+    }
+
+    public void ApplyBuildingOption()
+    {
+
     }
 }

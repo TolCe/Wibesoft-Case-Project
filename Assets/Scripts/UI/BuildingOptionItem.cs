@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,13 +9,20 @@ public class BuildingOptionItem : MonoBehaviour, ISwipable
 
     [SerializeField] private Image _iconImage;
 
-    [SerializeField] private BuildingOptionData _data;
-
     private void Start()
     {
+    }
+
+    public void AddDragAction(IBuildingOption buildingOption)
+    {
+        _eventTrigger.triggers.RemoveRange(0, _eventTrigger.triggers.Count);
+
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.BeginDrag;
-        entry.callback.AddListener((data) => { OnDrag(); });
+        entry.callback.AddListener((data) =>
+        {
+            BuildingOptionsController.Instance.InitializeFollower(buildingOption);
+        });
 
         _eventTrigger.triggers.Add(entry);
     }
@@ -26,20 +34,12 @@ public class BuildingOptionItem : MonoBehaviour, ISwipable
 
     public void OnDrag()
     {
-        BuildingOptionsController.Instance.InitializeFollower(_data);
+
     }
 
-    public void SetData(BuildingOptionData data)
+    public void SetIcon(Sprite icon)
     {
-        _data = data;
-
-        SetIcon();
-
         gameObject.SetActive(true);
-    }
-
-    public void SetIcon()
-    {
-        _iconImage.sprite = _data.Icon;
+        _iconImage.sprite = icon;
     }
 }
