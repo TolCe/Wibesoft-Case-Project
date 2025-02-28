@@ -14,8 +14,6 @@ public class FarmPlot : Building, IModifiable
             {
                 AttachedPlant = PlantsPoolController.Instance.GetFromPool();
                 AttachedPlant.Initialize(PlantsController.Instance.SelectedPlantData, transform.position);
-
-                PlantsController.Instance.TakeAction();
             }
         }
         else
