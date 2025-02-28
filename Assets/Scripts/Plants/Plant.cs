@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _rend;
+    [SerializeField] private Transform _scaleTransform;
+
+    [SerializeField] private Renderer _rend;
 
     public PlantData PlantData { get; private set; }
 
@@ -32,7 +34,7 @@ public class Plant : MonoBehaviour
 
     private void SetColor(Color color)
     {
-        _rend.color = color;
+        _rend.material.color = color;
     }
 
     private void SetPosition(Vector3 position)
@@ -49,6 +51,6 @@ public class Plant : MonoBehaviour
 
     private void SetPlantFilling()
     {
-        _rend.transform.localScale = new Vector3(1, HarvestTimer / PlantData.HarvestTime, 1);
+        _scaleTransform.localScale = new Vector3(1, HarvestTimer / PlantData.HarvestTime, 1);
     }
 }
